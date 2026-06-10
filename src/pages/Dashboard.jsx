@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../lib/auth.jsx'
 import { fmtDay, fmtTime } from '../lib/scheduling'
+import ConnectGoogleButton from '../components/ConnectGoogleButton';
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
@@ -53,7 +54,16 @@ export default function Dashboard() {
       setLoading(false)
     })()
   }, [user])
-
+useEffect(() => {
+    const flag = new URLSearchParams(window.location.search).get('google')
+    if (flag === 'connected') {
+      setMsg('Google Calendar connected ✅')
+      window.history.replaceState({}, '', '/dashboard')
+    } else if (flag === 'error') {
+      setMsg('Google connection failed — please try again.')
+      window.history.replaceState({}, '', '/dashboard')
+    }
+  }, [])
   async function save() {
     setMsg('')
     if (!profile.display_name.trim() || !profile.slug.trim()) {
@@ -117,6 +127,12 @@ export default function Dashboard() {
       <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(0,1fr)', gap: '2rem', alignItems: 'start' }}>
         <div className="card">
           <h3 style={{ marginBottom: '1rem' }}>Settings</h3>
+
+          <div className="field">
+            <label>Calendar</label>
+            <ConnectGoogleButton />
+          </div>
+
           <div className="field">
             <label>Display name</label>
             <input value={profile.display_name} onChange={(e) => setProfile({ ...profile, display_name: e.target.value })} placeholder="Frank Martinez" />
