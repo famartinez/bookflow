@@ -16,7 +16,7 @@ export default function ConnectGoogleButton() {
     }
 
     const params = new URLSearchParams({
-      client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+      client_id: '657033476930-rar6vh58piftdrsk0ibcrjs06jbs0b37.apps.googleusercontent.com',
       redirect_uri: `${window.location.origin}/api/google/callback`,
       response_type: 'code',
       scope: 'https://www.googleapis.com/auth/calendar.events',
