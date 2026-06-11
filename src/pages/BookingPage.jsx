@@ -63,6 +63,20 @@ export default function BookingPage() {
       setErr(error.code === '23505' ? 'Sorry, that slot was just booked. Pick another.' : error.message)
       if (error.code === '23505') { setStep('pick'); setSelectedSlot(null) }
     } else {
+      // Fire the calendar invite — don't block the success screen on it
+      fetch('/api/google/create-event', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          hostId: profile.id,
+          guestName: form.name.trim(),
+          guestEmail: form.email.trim(),
+          startTime: start.toISOString(),
+          endTime: end.toISOString(),
+          timezone: profile.timezone,
+          notes: form.notes.trim() || null,
+        }),
+      }).catch(() => {})
       setStep('done')
     }
   }
