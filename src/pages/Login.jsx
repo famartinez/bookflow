@@ -34,7 +34,7 @@ export default function Login() {
   return (
     <div className="wrap fade-in" style={{ maxWidth: 460 }}>
       <div className="topbar">
-        <Link to="/" className="logo" style={{ color: 'var(--ink)' }}>BookFlow</Link>
+        <Link to="/" className="logo" style={{ color: 'var(--ink)' }}>Talk to Me</Link>
       </div>
       <p className="eyebrow">Sign in or create an account</p>
       <h1 style={{ margin: '0.5rem 0 1.5rem' }}>Welcome</h1>

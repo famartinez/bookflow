@@ -117,7 +117,7 @@ useEffect(() => {
   return (
     <div className="wrap-wide fade-in">
       <div className="topbar">
-        <Link to="/" className="logo" style={{ color: 'var(--ink)' }}>BookFlow</Link>
+        <Link to="/" className="logo" style={{ color: 'var(--ink)' }}>Talk to Me</Link>
         <button className="ghost" onClick={signOut}>Sign out</button>
       </div>
 

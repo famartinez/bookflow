@@ -6,7 +6,7 @@ export default function Landing() {
   return (
     <div className="wrap fade-in">
       <div className="topbar">
-        <span className="logo">BookFlow</span>
+        <span className="logo">Talk to Me</span>
         <nav>
           {user ? <Link to="/dashboard">Dashboard</Link> : <Link to="/login">Sign in</Link>}
         </nav>
@@ -31,7 +31,7 @@ export default function Landing() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
         <div>
           <h3>Your own URL</h3>
-          <p className="muted">Send people to bookflow.app/book/your-name. They pick a time, you get the booking.</p>
+          <p className="muted">Send people to talktome.app/book/your-name. They pick a time, you get the booking.</p>
         </div>
         <div>
           <h3>No double-booking</h3>
