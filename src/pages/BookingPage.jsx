@@ -4,10 +4,23 @@ import { supabase } from '../lib/supabase'
 import { upcomingDays, slotsForDay, endTime, fmtTime, fmtDay, fmtDayShort } from '../lib/scheduling'
 import { useLanguage } from '../contexts/LanguageContext.jsx'
 
+const DEMO_PROFILE = {
+  id: 'demo',
+  slug: 'demo',
+  display_name: 'Alex Rivera',
+  bio: 'Product designer open to new projects. Book a quick intro call.',
+  timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  day_start: 9,
+  day_end: 17,
+  slot_minutes: 15,
+  workdays: [1, 2, 3, 4, 5],
+}
+
 export default function BookingPage() {
   const { slug } = useParams()
   const { t } = useLanguage()
-  const [profile, setProfile] = useState(null)
+  const isDemo = slug === 'demo'
+  const [profile, setProfile] = useState(isDemo ? DEMO_PROFILE : null)
   const [notFound, setNotFound] = useState(false)
   const [selectedDay, setSelectedDay] = useState(null)
   const [selectedSlot, setSelectedSlot] = useState(null)
@@ -18,6 +31,11 @@ export default function BookingPage() {
   const [busy, setBusy] = useState(false)
 
   useEffect(() => {
+    if (isDemo) {
+      const days = upcomingDays(DEMO_PROFILE)
+      setSelectedDay(days[0] || null)
+      return
+    }
     ;(async () => {
       const { data } = await supabase.from('profiles').select('*').eq('slug', slug).maybeSingle()
       if (!data) { setNotFound(true); return }
@@ -28,7 +46,7 @@ export default function BookingPage() {
   }, [slug])
 
   useEffect(() => {
-    if (!profile || !selectedDay) return
+    if (!profile || !selectedDay || isDemo) return
     ;(async () => {
       const from = new Date(selectedDay); from.setHours(0, 0, 0, 0)
       const to = new Date(selectedDay); to.setHours(23, 59, 59, 999)
@@ -47,6 +65,7 @@ export default function BookingPage() {
       setErr(t.book_err_invalid)
       return
     }
+    if (isDemo) { setStep('done'); return }
     setBusy(true)
     const start = selectedSlot
     const end = endTime(profile, start)
