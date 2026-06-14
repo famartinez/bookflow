@@ -1,16 +1,17 @@
-import { useState, useEffect } from 'react';
-import { supabase } from '../lib/supabase'; // adjust to wherever your supabase client lives
+import { useState } from 'react';
+import { supabase } from '../lib/supabase';
+import { useLanguage } from '../contexts/LanguageContext.jsx';
 
 export default function ConnectGoogleButton() {
   const [loading, setLoading] = useState(false);
+  const { t } = useLanguage();
 
   const handleConnect = async () => {
     setLoading(true);
 
-    // Get the logged-in host's user id so the callback knows who's connecting
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) {
-      alert('Please log in first.');
+      alert(t.google_login_first);
       setLoading(false);
       return;
     }
@@ -30,7 +31,7 @@ export default function ConnectGoogleButton() {
 
   return (
     <button onClick={handleConnect} disabled={loading}>
-      {loading ? 'Redirecting…' : '📅 Connect Google Calendar'}
+      {loading ? t.google_redirecting : t.google_connect}
     </button>
   );
 }
