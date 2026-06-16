@@ -35,6 +35,13 @@ export default function Landing() {
 
       <hr className="divider" />
 
+      <blockquote className="pull-quote">
+        <p>"Until we can manage time, we can manage nothing else."</p>
+        <cite>— Peter Drucker</cite>
+      </blockquote>
+
+      <hr className="divider" />
+
       <div className="feat-grid">
         {features(t).map(({ num, title, desc }) => (
           <div key={num} className="feat-card">
