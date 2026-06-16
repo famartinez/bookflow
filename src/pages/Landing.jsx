@@ -2,6 +2,12 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../lib/auth.jsx'
 import { useLanguage } from '../contexts/LanguageContext.jsx'
 
+const features = (t) => [
+  { num: '01', title: t.landing_feat1_title, desc: t.landing_feat1_desc },
+  { num: '02', title: t.landing_feat2_title, desc: t.landing_feat2_desc },
+  { num: '03', title: t.landing_feat3_title, desc: t.landing_feat3_desc },
+]
+
 export default function Landing() {
   const { user } = useAuth()
   const { t } = useLanguage()
@@ -17,34 +23,26 @@ export default function Landing() {
         </nav>
       </div>
 
-      <p className="eyebrow">{t.landing_eyebrow}</p>
-      <h1 style={{ margin: '0.6rem 0 1.2rem', maxWidth: '12ch' }}>
-        {t.landing_heading}
-      </h1>
-      <p className="muted" style={{ fontSize: '1.2rem', maxWidth: '50ch', marginBottom: '2rem' }}>
-        {t.landing_desc}
-      </p>
-
-      <div style={{ display: 'flex', gap: '0.8rem', flexWrap: 'wrap' }}>
-        <Link to="/login"><button className="primary">{t.landing_cta_primary}</button></Link>
-        <a href="/book/demo"><button className="ghost">{t.landing_cta_secondary}</button></a>
-      </div>
+      <section className="landing-hero">
+        <p className="eyebrow">{t.landing_eyebrow}</p>
+        <h1 className="landing-heading">{t.landing_heading}</h1>
+        <p className="muted landing-desc">{t.landing_desc}</p>
+        <div className="cta-row">
+          <Link to="/login"><button className="primary">{t.landing_cta_primary}</button></Link>
+          <a href="/book/demo"><button className="ghost">{t.landing_cta_secondary}</button></a>
+        </div>
+      </section>
 
       <hr className="divider" />
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
-        <div>
-          <h3>{t.landing_feat1_title}</h3>
-          <p className="muted">{t.landing_feat1_desc}</p>
-        </div>
-        <div>
-          <h3>{t.landing_feat2_title}</h3>
-          <p className="muted">{t.landing_feat2_desc}</p>
-        </div>
-        <div>
-          <h3>{t.landing_feat3_title}</h3>
-          <p className="muted">{t.landing_feat3_desc}</p>
-        </div>
+      <div className="feat-grid">
+        {features(t).map(({ num, title, desc }) => (
+          <div key={num} className="feat-card">
+            <span className="feat-num">{num}</span>
+            <h3>{title}</h3>
+            <p className="muted">{desc}</p>
+          </div>
+        ))}
       </div>
     </div>
   )
