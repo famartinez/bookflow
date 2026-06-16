@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useAuth } from '../lib/auth.jsx'
 import { useLanguage } from '../contexts/LanguageContext.jsx'
+import dailyQuote from '../lib/quotes.js'
 
 const features = (t) => [
   { num: '01', title: t.landing_feat1_title, desc: t.landing_feat1_desc },
@@ -36,8 +37,8 @@ export default function Landing() {
       <hr className="divider" />
 
       <blockquote className="pull-quote">
-        <p>"Until we can manage time, we can manage nothing else."</p>
-        <cite>— Peter Drucker</cite>
+        <p>"{dailyQuote.text}"</p>
+        <cite>— {dailyQuote.author}</cite>
       </blockquote>
 
       <hr className="divider" />
