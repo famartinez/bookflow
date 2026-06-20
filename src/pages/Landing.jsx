@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useAuth } from '../lib/auth.jsx'
 import { useLanguage } from '../contexts/LanguageContext.jsx'
-import dailyQuote from '../lib/quotes.js'
+import { useAINews } from '../lib/aiNews.js'
 
 const features = (t) => [
   { num: '01', title: t.landing_feat1_title, desc: t.landing_feat1_desc },
@@ -12,6 +12,7 @@ const features = (t) => [
 export default function Landing() {
   const { user } = useAuth()
   const { t } = useLanguage()
+  const { headlines, loading } = useAINews()
 
   return (
     <div className="wrap fade-in">
@@ -24,8 +25,25 @@ export default function Landing() {
         </nav>
       </div>
 
+      <section className="news-section">
+        <p className="eyebrow">AI Today</p>
+        {loading
+          ? <p className="muted news-loading">Loading…</p>
+          : headlines.length > 0
+            ? <ul className="news-list">
+                {headlines.map((h, i) => (
+                  <li key={i}>
+                    <a href={h.url} target="_blank" rel="noopener noreferrer">{h.title}</a>
+                  </li>
+                ))}
+              </ul>
+            : <p className="muted">No headlines right now.</p>
+        }
+      </section>
+
+      <hr className="divider" />
+
       <section className="landing-hero">
-        <p className="eyebrow">{t.landing_eyebrow}</p>
         <h1 className="landing-heading">{t.landing_heading}</h1>
         <p className="muted landing-desc">{t.landing_desc}</p>
         <div className="cta-row">
@@ -33,13 +51,6 @@ export default function Landing() {
           <a href="/book/demo"><button className="ghost">{t.landing_cta_secondary}</button></a>
         </div>
       </section>
-
-      <hr className="divider" />
-
-      <blockquote className="pull-quote">
-        <p>"{dailyQuote.text}"</p>
-        <cite>— {dailyQuote.author}</cite>
-      </blockquote>
 
       <hr className="divider" />
 
