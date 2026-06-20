@@ -12,7 +12,7 @@ const features = (t) => [
 export default function Landing() {
   const { user } = useAuth()
   const { t } = useLanguage()
-  const { headlines, loading } = useAINews()
+  const { headlines, loading, dateLabel } = useAINews()
 
   return (
     <div className="wrap fade-in">
@@ -26,7 +26,7 @@ export default function Landing() {
       </div>
 
       <section className="news-section">
-        <p className="eyebrow">AI Today</p>
+        <p className="eyebrow">AI News — {dateLabel}</p>
         {loading
           ? <p className="muted news-loading">Loading…</p>
           : headlines.length > 0
@@ -34,6 +34,7 @@ export default function Landing() {
                 {headlines.map((h, i) => (
                   <li key={i}>
                     <a href={h.url} target="_blank" rel="noopener noreferrer">{h.title}</a>
+                    {h.source && <span className="news-source">{h.source}</span>}
                   </li>
                 ))}
               </ul>

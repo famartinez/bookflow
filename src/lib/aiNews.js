@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react'
 
-const FEED = 'https://techcrunch.com/category/artificial-intelligence/feed/'
-const API = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(FEED)}&count=5`
+const DATE_LABEL = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+const API = 'https://hn.algolia.com/api/v1/search_by_date?query=artificial+intelligence&tags=story&hitsPerPage=10'
+
+function domain(url) {
+  try { return new URL(url).hostname.replace('www.', '') } catch { return '' }
+}
 
 export function useAINews() {
   const [headlines, setHeadlines] = useState([])
@@ -11,13 +15,16 @@ export function useAINews() {
     fetch(API)
       .then(r => r.json())
       .then(data => {
-        if (data.status === 'ok') {
-          setHeadlines(data.items.map(item => ({ title: item.title, url: item.link })))
-        }
+        setHeadlines(
+          data.hits
+            .filter(h => h.url && h.title)
+            .slice(0, 5)
+            .map(h => ({ title: h.title, url: h.url, source: domain(h.url) }))
+        )
       })
       .catch(() => {})
       .finally(() => setLoading(false))
   }, [])
 
-  return { headlines, loading }
+  return { headlines, loading, dateLabel: DATE_LABEL }
 }

@@ -102,6 +102,7 @@ label { display: block; font-size: 0.85rem; color: var(--ink-soft); margin-botto
 .news-list a { color: var(--ink); border-bottom: 1px solid transparent; transition: border-color 0.12s ease, color 0.12s ease; }
 .news-list a:hover { color: var(--accent); text-decoration: none; border-bottom-color: var(--accent); }
 .news-loading { font-size: 0.9rem; }
+.news-source { font-size: 0.72rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.05em; margin-left: 0.5rem; }
 
 .feat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
 .feat-card { border-top: 2px solid var(--line); padding-top: 1rem; transition: border-color 0.15s ease; }
