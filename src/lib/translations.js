@@ -17,19 +17,8 @@ const translations = {
     // Landing
     landing_eyebrow: 'Scheduling, minus the back-and-forth',
     landing_heading: 'Share a link. Get booked.',
-    landing_desc:
-      'Give people one link and let them grab a 15-minute slot on your calendar — no emails, no double-bookings. Each account gets its own public booking page.',
+    landing_desc: 'Give people one link. They pick a time. You get a booking.',
     landing_cta_primary: 'Create your page →',
-    landing_cta_secondary: 'See a live example',
-    landing_feat1_title: 'Your own URL',
-    landing_feat1_desc:
-      'Send people to talktome.app/book/your-name. They pick a time, you get the booking.',
-    landing_feat2_title: 'No double-booking',
-    landing_feat2_desc:
-      'Taken slots disappear automatically. The database enforces one booking per slot.',
-    landing_feat3_title: 'Set your hours',
-    landing_feat3_desc:
-      'Choose your workdays, start and end time, and slot length from the dashboard.',
 
     // Login
     login_eyebrow: 'Sign in or create an account',
@@ -119,19 +108,8 @@ const translations = {
     // Landing
     landing_eyebrow: 'Agenda sin idas y venidas',
     landing_heading: 'Comparte un enlace. Recibe reservas.',
-    landing_desc:
-      'Comparte un enlace y deja que las personas reserven un espacio en tu calendario — sin correos, sin dobles reservas. Cada cuenta tiene su propia página pública de reservas.',
+    landing_desc: 'Comparte un enlace. Eligen un horario. Recibes la reserva.',
     landing_cta_primary: 'Crea tu página →',
-    landing_cta_secondary: 'Ver un ejemplo en vivo',
-    landing_feat1_title: 'Tu propia URL',
-    landing_feat1_desc:
-      'Comparte talktome.app/book/tu-nombre. Ellos eligen la hora, tú recibes la reserva.',
-    landing_feat2_title: 'Sin dobles reservas',
-    landing_feat2_desc:
-      'Los horarios ocupados desaparecen automáticamente. La base de datos garantiza una reserva por espacio.',
-    landing_feat3_title: 'Configura tu horario',
-    landing_feat3_desc:
-      'Elige tus días laborales, hora de inicio y fin, y duración de los espacios desde el panel.',
 
     // Login
     login_eyebrow: 'Inicia sesión o crea una cuenta',
